@@ -6,6 +6,7 @@ module.exports = {
 
     signup: async (req, res) => {
         try {
+            console.log("asdaygsdagsdi",req);
             const { email, name, phone, password } = req.body;
             const owner = new ownerschema({
                 name: name,

@@ -1,8 +1,9 @@
-// app.js
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const app = express();
+const multer = require('multer')
+const path = require('path')
 const ownerRouter = require('./router/owner');
 
 // Middleware
@@ -21,6 +22,29 @@ mongoose.connect(dbUrl, connectionParams)
   .catch((e) => {
     console.log("Error:", e);
   });
+
+
+  //upload image
+
+  const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, 'public/owner/upload')
+    },
+    filename: function (req, file, cb) {
+      cb(null, file.fieldname + '-' + Date.now()+
+      path.extname(file.originalname))
+    }
+  })
+  
+  const fileFilter = function(req, file, cb) {
+    if (file.mimetype === 'image/jpg' || file.mimetype === 'image/png' || file.mimetype === 'image/jpeg') {
+      cb(null, true);
+    } else {
+      cb(null, false);
+    }
+  };
+  
+  app.use(multer({ storage: storage, fileFilter: fileFilter }).single('photo'));
 
 // Use the owner router
 app.use('/owner', ownerRouter);
