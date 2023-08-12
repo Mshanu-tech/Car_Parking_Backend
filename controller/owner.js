@@ -31,6 +31,7 @@ module.exports = {
 
                 if (data) {
                     console.log("login success");
+                    res.json(owner)
                 } else {
                     console.log("password wrong");
                 }
@@ -38,6 +39,7 @@ module.exports = {
                 console.log("email not get");
             }
         } catch (error) {
+            res.json("fail")
             console.log(error);
         }
     },

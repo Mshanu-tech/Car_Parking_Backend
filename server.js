@@ -1,10 +1,18 @@
 const express = require('express');
+require("dotenv").config();
 const cors = require('cors');
 const mongoose = require('mongoose');
 const app = express();
 const multer = require('multer')
+const multerS3 = require('multer-s3')
 const path = require('path')
 const ownerRouter = require('./router/owner');
+
+//Configure aws a3 SDK (update authentication)
+const AWS = require('aws-sdk')
+AWS.config.update({
+})
+
 
 // Middleware
 app.use(express.json());
