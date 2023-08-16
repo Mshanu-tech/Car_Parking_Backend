@@ -1,5 +1,5 @@
 const ownerschema = require("../model/owner/owner")
-const plotform = require("../model/owner/plot")
+const plotSchema = require("../model/owner/plot")
 const bcrypt = require('bcrypt')
 
 module.exports = {
@@ -47,10 +47,11 @@ module.exports = {
         const owner = await ownerschema.find()
         console.log(owner);
     },
-    plots: async(req,res)=>{
+    postplots: async(req,res)=>{
         const {placename, hour, day, month, location, plotdetails}=req.body
+        // console.log("none",placename, hour, day, month, location, plotdetails)
         try {
-            const plot = new plotform({
+            const plot = new plotSchema({
                 placename:placename,
                 hour:hour,
                 day:day,
@@ -64,5 +65,15 @@ module.exports = {
         } catch (error) {
             console.log(error);
         }
+    },
+    getplots: async(req,res)=>{
+        try {
+            const plots = await plotSchema.find()
+            res.json({status:"success",message:"success fully fetched",data:{plots}})
+        } catch (error) {
+            res.json("fail")
+            console.log(error);
+        }
+// .json({status:"succes",message"",data:plots})
     }
 }

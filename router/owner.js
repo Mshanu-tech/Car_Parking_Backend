@@ -5,12 +5,14 @@ const {
     signup,
     login,
     users,
-    plots
+    postplots,
+    getplots
 } = require('../controller/owner')
 
 router.post('/signup',signup)
 router.post('/login',login)
 router.get('/users',users)
-router.post('/plots',plots)
+router.post('/plots',postplots)
+router.get('/plots',getplots)
 
 module.exports=router

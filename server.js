@@ -3,15 +3,14 @@ require("dotenv").config();
 const cors = require('cors');
 const mongoose = require('mongoose');
 const app = express();
-const multer = require('multer')
-const multerS3 = require('multer-s3')
+// const multer = require('multer')
+// const multerS3 = require('multer-s3')
 const path = require('path')
-const ownerRouter = require('./router/owner');
 
 //Configure aws a3 SDK (update authentication)
-const AWS = require('aws-sdk')
-AWS.config.update({
-})
+// const AWS = require('aws-sdk')
+// AWS.config.update({
+// })
 
 
 // Middleware
@@ -34,27 +33,32 @@ mongoose.connect(dbUrl, connectionParams)
 
   //upload image
 
-  const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-      cb(null, 'public/owner/upload')
-    },
-    filename: function (req, file, cb) {
-      cb(null, file.fieldname + '-' + Date.now()+
-      path.extname(file.originalname))
-    }
-  })
+  // const storage = multer.diskStorage({
+  //   destination: function (req, file, cb) {
+  //     cb(null, 'public/owner/upload')
+  //   },
+  //   filename: function (req, file, cb) {
+  //     cb(null, file.fieldname + '-' + Date.now()+
+  //     path.extname(file.originalname))
+  //   }
+  // })
   
-  const fileFilter = function(req, file, cb) {
-    if (file.mimetype === 'image/jpg' || file.mimetype === 'image/png' || file.mimetype === 'image/jpeg') {
-      cb(null, true);
-    } else {
-      cb(null, false);
-    }
-  };
+  // const fileFilter = function(req, file, cb) {
+  //   if (file.mimetype === 'image/jpg' || file.mimetype === 'image/png' || file.mimetype === 'image/jpeg') {
+  //     cb(null, true);
+  //   } else {
+  //     cb(null, false);
+  //   }
+  // };
   
-  app.use(multer({ storage: storage, fileFilter: fileFilter }).single('photo'));
+  // app.use(multer({ storage: storage, fileFilter: fileFilter }).single('photo'));
 
 // Use the owner router
+
+const ownerRouter = require('./router/owner');
+const userRouter = require('./router/user')
+
+app.use('/', userRouter)
 app.use('/owner', ownerRouter);
 
 const Port = 5000;
