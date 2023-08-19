@@ -1,6 +1,9 @@
 const mongoose = require('mongoose');
 
 const plotschema = new mongoose.Schema({
+  center: {
+    type:String
+  },
   placename: {
     type: String,
     // required: true,

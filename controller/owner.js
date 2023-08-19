@@ -48,10 +48,11 @@ module.exports = {
         console.log(owner);
     },
     postplots: async(req,res)=>{
-        const {placename, hour, day, month, location, plotdetails}=req.body
+        const {center,placename, hour, day, month, location, plotdetails}=req.body
         // console.log("none",placename, hour, day, month, location, plotdetails)
         try {
             const plot = new plotSchema({
+                center:center,
                 placename:placename,
                 hour:hour,
                 day:day,
