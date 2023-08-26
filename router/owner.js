@@ -8,7 +8,8 @@ const {
     postplots,
     getplots,
     getplot,
-    editPlot
+    editPlot,
+    deletePlot
 } = require('../controller/owner')
 
 router.post('/signup',signup)
@@ -17,6 +18,7 @@ router.get('/users',users)
 router.post('/plots',postplots)
 router.get('/plots',getplots)
 router.get('/plot/:id', getplot);
-router.put('/plot', editPlot)
+router.put('/plot', editPlot);
+router.delete('/plot/:id',deletePlot)
 
 module.exports=router

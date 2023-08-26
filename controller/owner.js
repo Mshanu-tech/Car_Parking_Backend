@@ -6,7 +6,7 @@ module.exports = {
 
     signup: async (req, res) => {
         try {
-            console.log("asdaygsdagsdi",req);
+            console.log("asdaygsdagsdi", req);
             const { email, name, phone, password } = req.body;
             const owner = new ownerschema({
                 name: name,
@@ -47,39 +47,39 @@ module.exports = {
         const owner = await ownerschema.find()
         console.log(owner);
     },
-    postplots: async(req,res)=>{
-        const {center,placename, hour, day, month, location,Image ,plotdetails}=req.body
-        console.log( plotdetails,Image)
+    postplots: async (req, res) => {
+        const { center, placename, hour, day, month, location, Image, plotdetails } = req.body
+        console.log(plotdetails, Image)
         try {
             const plot = new plotSchema({
-                center:center,
-                placename:placename,
-                hour:hour,
-                day:day,
-                images:Image,
-                month:month,
-                location:location,
-                plotdetails:plotdetails
+                center: center,
+                placename: placename,
+                hour: hour,
+                day: day,
+                images: Image,
+                month: month,
+                location: location,
+                plotdetails: plotdetails
             })
-          await plot.save().then((form)=>{
-            console.log(form);
-          })
+            await plot.save().then((form) => {
+                console.log(form);
+            })
         } catch (error) {
             console.log(error);
         }
     },
-    getplots: async(req,res)=>{
+    getplots: async (req, res) => {
         try {
             const plots = await plotSchema.find()
-            res.json({status:"success",message:"success fully fetched",data:{plots}})
+            res.json({ status: "success", message: "success fully fetched", data: { plots } })
         } catch (error) {
             res.json("fail")
             console.log(error);
         }
-// .json({status:"succes",message"",data:plots})
+        // .json({status:"succes",message"",data:plots})
     },
-    getplot: async(req,res)=>{
-        const { id }= req.params
+    getplot: async (req, res) => {
+        const { id } = req.params
         // console.log(id);
         try {
             const plot = await plotSchema.findById(id);
@@ -89,26 +89,41 @@ module.exports = {
             console.log(error);
         }
     },
-    editPlot: (req,res) => {
-        const {_id,center,placename, hour, day, month, location,Image ,plotdetails}=req.body
-        console.log(_id,center,placename, hour, day, month, location,Image ,plotdetails);
+    editPlot: (req, res) => {
+        const { _id, center, placename, hour, day, month, location, Image, plotdetails } = req.body
+        console.log(_id, center, placename, hour, day, month, location, Image, plotdetails);
         try {
 
-         plotSchema.findByIdAndUpdate(_id,{
-            center:center,
-            placename:placename,
-            hour:hour,
-            day:day,
-            month:month,
-            location:location,
-            plotdetails:plotdetails,
-            images:Image
-        }).then((plot)=>{
-            console.log(plot);
-        })
-                    
-    } catch (error) {
+            plotSchema.findByIdAndUpdate(_id, {
+                center: center,
+                placename: placename,
+                hour: hour,
+                day: day,
+                month: month,
+                location: location,
+                plotdetails: plotdetails,
+                images: Image
+            }).then((plot) => {
+                console.log(plot);
+            })
+
+        } catch (error) {
             console.log(error);
+        }
+    },
+    deletePlot: async (req, res) => {
+        const { id } = req.params
+        console.log(id);
+        try {
+            await plotSchema.deleteOne({ _id: id })
+                .then(() => {
+                    console.log("deleted");
+                })
+            res.json("deleted")
+        } catch (error) {
+            console.log(error);
+        }
+
     }
-    }
+
 }
