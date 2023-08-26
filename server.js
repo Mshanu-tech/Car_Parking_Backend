@@ -61,8 +61,8 @@ const userRouter = require('./router/user')
 app.use('/', userRouter)
 app.use('/owner', ownerRouter);
 
-const Port = 5000;
+const Port = 5500;
 app.listen(Port, () => {
   console.log(`Server started on port ${Port}`);
-});
+})
 

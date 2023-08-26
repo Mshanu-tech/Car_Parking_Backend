@@ -6,7 +6,9 @@ const {
     login,
     users,
     postplots,
-    getplots
+    getplots,
+    getplot,
+    editPlot
 } = require('../controller/owner')
 
 router.post('/signup',signup)
@@ -14,5 +16,7 @@ router.post('/login',login)
 router.get('/users',users)
 router.post('/plots',postplots)
 router.get('/plots',getplots)
+router.get('/plot/:id', getplot);
+router.put('/plot', editPlot)
 
 module.exports=router

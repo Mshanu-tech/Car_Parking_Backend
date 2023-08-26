@@ -77,5 +77,38 @@ module.exports = {
             console.log(error);
         }
 // .json({status:"succes",message"",data:plots})
+    },
+    getplot: async(req,res)=>{
+        const { id }= req.params
+        // console.log(id);
+        try {
+            const plot = await plotSchema.findById(id);
+            res.json(plot)
+        } catch (error) {
+            res.json("fail")
+            console.log(error);
+        }
+    },
+    editPlot: (req,res) => {
+        const {_id,center,placename, hour, day, month, location,Image ,plotdetails}=req.body
+        console.log(_id,center,placename, hour, day, month, location,Image ,plotdetails);
+        try {
+
+         plotSchema.findByIdAndUpdate(_id,{
+            center:center,
+            placename:placename,
+            hour:hour,
+            day:day,
+            month:month,
+            location:location,
+            plotdetails:plotdetails,
+            images:Image
+        }).then((plot)=>{
+            console.log(plot);
+        })
+                    
+    } catch (error) {
+            console.log(error);
+    }
     }
 }
