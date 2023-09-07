@@ -1,6 +1,19 @@
 const ownerschema = require("../model/owner/owner")
 const plotSchema = require("../model/owner/plot")
 const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken')
+const maxAge = 3 * 24 * 60 * 60;
+
+// const createToken = (id: string) => {
+//     try {
+//         return jwt.sign({ id }, secret_key, {
+//             expiresIn: maxAge
+//         });
+//     } catch (error) {
+//         console.error("Error while creating the JWT token:", error);
+//         throw error; // Re-throw the error to handle it in the calling function
+//     }
+// };
 
 module.exports = {
 
@@ -28,8 +41,12 @@ module.exports = {
             if (owner) {
                 console.log(owner.password, password);
                 const data = await bcrypt.compare(password, owner.password)
-
                 if (data) {
+                    const id = data.id
+                    console.log(id);
+                    const token = jwt.sign({id}, "jwtSecret",{
+                        expiresIn:300
+                    })
                     console.log("login success");
                     res.json(owner)
                 } else {

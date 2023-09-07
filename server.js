@@ -1,16 +1,11 @@
 const express = require('express');
 require("dotenv").config();
 const cors = require('cors');
-const mongoose = require('mongoose');
 const app = express();
-// const multer = require('multer')
-// const multerS3 = require('multer-s3')
+const bodyParser = require('body-parser');
+const connection = require("./db")
 const path = require('path')
-
-//Configure aws a3 SDK (update authentication)
-// const AWS = require('aws-sdk')
-// AWS.config.update({
-// })
+const jwt = require('jsonwebtoken')
 
 
 // Middleware
@@ -19,39 +14,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
 // Connect to MongoDB
-const dbUrl = "mongodb+srv://new_user:TglSy1HfHYsUMMBO@cluster0.ixsdevh.mongodb.net/Car_Parking?retryWrites=true&w=majority";
-const connectionParams = { useNewUrlParser: true, useUnifiedTopology: true };
-
-mongoose.connect(dbUrl, connectionParams)
-  .then(() => {
-    console.log("Connected to the DB");
-  })
-  .catch((e) => {
-    console.log("Error:", e);
-  });
-
-
-  //upload image
-
-  // const storage = multer.diskStorage({
-  //   destination: function (req, file, cb) {
-  //     cb(null, 'public/owner/upload')
-  //   },
-  //   filename: function (req, file, cb) {
-  //     cb(null, file.fieldname + '-' + Date.now()+
-  //     path.extname(file.originalname))
-  //   }
-  // })
-  
-  // const fileFilter = function(req, file, cb) {
-  //   if (file.mimetype === 'image/jpg' || file.mimetype === 'image/png' || file.mimetype === 'image/jpeg') {
-  //     cb(null, true);
-  //   } else {
-  //     cb(null, false);
-  //   }
-  // };
-  
-  // app.use(multer({ storage: storage, fileFilter: fileFilter }).single('photo'));
+connection()
 
 // Use the owner router
 
