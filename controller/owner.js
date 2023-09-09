@@ -107,8 +107,8 @@ module.exports = {
         }
     },
     editPlot: (req, res) => {
-        const { _id, center, placename, hour, day, month, location, Image, plotdetails } = req.body
-        console.log(_id, center, placename, hour, day, month, location, Image, plotdetails);
+        const { _id, center, placename, hour, day, month, location, images, plotdetails } = req.body
+        console.log(_id, center, placename, hour, day, month, location, images, plotdetails);
         try {
 
             plotSchema.findByIdAndUpdate(_id, {
@@ -119,7 +119,7 @@ module.exports = {
                 month: month,
                 location: location,
                 plotdetails: plotdetails,
-                images: Image
+                images: images
             }).then((plot) => {
                 console.log(plot);
             })
