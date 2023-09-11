@@ -27,10 +27,15 @@ const plotschema = new mongoose.Schema({
     type: String,
     // required: true,
   },
+  carspot: {
+    type: Number
+  },
+  notWorkingspot:{
+    type:String
+  },
   images: 
     {
-      type: String, // Assuming you are storing the image file path as a string
-    //   required: true,
+      type: String
     },
 });
 

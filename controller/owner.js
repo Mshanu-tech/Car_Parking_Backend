@@ -65,7 +65,7 @@ module.exports = {
         console.log(owner);
     },
     postplots: async (req, res) => {
-        const { center, placename, hour, day, month, location, Image, plotdetails } = req.body
+        const { center, placename, hour, day, month, notworking, location, carspot, Image, plotdetails } = req.body
         console.log(plotdetails, Image)
         try {
             const plot = new plotSchema({
@@ -76,6 +76,8 @@ module.exports = {
                 images: Image,
                 month: month,
                 location: location,
+                carspot:carspot,
+                notWorkingspot:notworking,
                 plotdetails: plotdetails
             })
             await plot.save().then((form) => {
@@ -107,10 +109,9 @@ module.exports = {
         }
     },
     editPlot: (req, res) => {
-        const { _id, center, placename, hour, day, month, location, images, plotdetails } = req.body
+        const { _id, center, placename, hour, day, month, location, images, notworking, carspot, plotdetails, } = req.body
         console.log(_id, center, placename, hour, day, month, location, images, plotdetails);
         try {
-
             plotSchema.findByIdAndUpdate(_id, {
                 center: center,
                 placename: placename,
@@ -118,8 +119,10 @@ module.exports = {
                 day: day,
                 month: month,
                 location: location,
+                carspot:carspot,
                 plotdetails: plotdetails,
-                images: images
+                images: images,
+                notWorkingspot:notworking
             }).then((plot) => {
                 console.log(plot);
             })
