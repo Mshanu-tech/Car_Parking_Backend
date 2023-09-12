@@ -65,7 +65,7 @@ module.exports = {
         console.log(owner);
     },
     postplots: async (req, res) => {
-        const { center, placename, hour, day, month, notworking, location, carspot, Image, plotdetails } = req.body
+        const { center, placename, hour, day, month, notworking, location, selectedFeatures, carspot, Image, plotdetails } = req.body
         console.log(plotdetails, Image)
         try {
             const plot = new plotSchema({
@@ -78,7 +78,8 @@ module.exports = {
                 location: location,
                 carspot:carspot,
                 notWorkingspot:notworking,
-                plotdetails: plotdetails
+                plotdetails: plotdetails,
+                features:selectedFeatures
             })
             await plot.save().then((form) => {
                 console.log(form);

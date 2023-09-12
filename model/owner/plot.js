@@ -37,6 +37,9 @@ const plotschema = new mongoose.Schema({
     {
       type: String
     },
+  features: {
+    type:Object
+  }
 });
 
 module.exports = mongoose.model('plot', plotschema);
