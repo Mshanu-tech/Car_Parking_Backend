@@ -19,10 +19,12 @@ connection()
 // Use the owner router
 
 const ownerRouter = require('./router/owner');
-const userRouter = require('./router/user')
+const userRouter = require('./router/user');
+const adminRouter = require('./router/admin')
 
 app.use('/', userRouter)
 app.use('/owner', ownerRouter);
+app.use('/admin', adminRouter)
 
 const Port = 5500;
 app.listen(Port, () => {

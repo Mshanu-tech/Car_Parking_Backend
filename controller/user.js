@@ -3,7 +3,7 @@ const carDetails = require("../model/user/carDetails")
 const userschema = require("../model/user/user")
 
 module.exports = {
-
+    
     getuser: async (req,res) => {
         try {
             const { name, email, phone, password } = req.body
@@ -56,4 +56,4 @@ module.exports = {
         }
 
     }
-} 
+}
