@@ -13,6 +13,9 @@ const ownerschema = new mongoose.Schema({
     },
     password:{
         type:String
+    },
+    image:{
+        type:String
     }
 });
 

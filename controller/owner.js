@@ -20,17 +20,20 @@ module.exports = {
     signup: async (req, res) => {
         try {
             console.log("asdaygsdagsdi", req);
-            const { email, name, phone, password } = req.body;
+            const { email, name, phone, password,Image } = req.body;
             const owner = new ownerschema({
                 name: name,
                 email: email,
                 phone: phone,
-                password: password
+                password: password,
+                image:Image
             })
             await owner.save().then(owner => {
+                res.json("success")
                 console.log(owner);
             })
         } catch (error) {
+            res.json("fail")
             console.log("error", error);
         }
     },
@@ -57,6 +60,22 @@ module.exports = {
             }
         } catch (error) {
             res.json("fail")
+            console.log(error);
+        }
+    },
+    editowner: async (req,res) => {
+        const {name,email,phone,image,_id} = req.body
+        console.log(name,email,phone,image,_id);
+        try {
+            ownerschema.findByIdAndUpdate(_id,{
+                name:name,
+                email:email,
+                phone:phone,
+                image:image
+            }).then((owner) => {
+                console.log("edit owner",owner)
+            })
+        } catch (error) {
             console.log(error);
         }
     },

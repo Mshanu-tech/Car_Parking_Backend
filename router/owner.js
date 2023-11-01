@@ -3,6 +3,7 @@ const router = express.Router()
 
 const {
     signup,
+    editowner,
     login,
     users,
     postplots,
@@ -13,6 +14,7 @@ const {
 } = require('../controller/owner')
 
 router.post('/signup',signup)
+router.put('/profile', editowner)
 router.post('/login',login)
 router.get('/users',users)
 router.post('/plots',postplots)
