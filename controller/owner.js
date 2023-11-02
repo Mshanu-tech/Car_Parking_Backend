@@ -18,20 +18,39 @@ const maxAge = 3 * 24 * 60 * 60;
 module.exports = {
 
     signup: async (req, res) => {
+        const { email, name, number, password,Image } = req.body;
+        if (!name || !email || !password  || !number) {
+            return res.json('plz fill the property' )
+        }
         try {
-            console.log("asdaygsdagsdi", req);
-            const { email, name, phone, password,Image } = req.body;
-            const owner = new ownerschema({
-                name: name,
-                email: email,
-                phone: phone,
-                password: password,
-                image:Image
-            })
-            await owner.save().then(owner => {
-                res.json("success")
-                console.log(owner);
-            })
+            const ownerExist = await ownerschema.findOne({ email: email });
+            if (ownerExist) {
+                return res.json( 'Email already exist' )
+            } else {
+                var val = Math.floor(1000 + Math.random() * 9000);
+                req.body.token = val
+                req.session.signup = req.body
+                // console.log("session",req.session.signup);
+                // mailTransporter.sendMail({
+                //     to: email,
+                //     from: process.env.EMAIL,
+                //     subject: 'Signup Verification',
+                //     html: `<h4>This your token for OTP Verfication </h4>:<h2>${val}</h2>`
+                // })
+                // res.redirect('/otpverification')
+            }
+            // console.log(req.body);
+            // const owner = new ownerschema({
+            //     name: name,
+            //     email: email,
+            //     phone: number,
+            //     password: password,
+            //     image:Image
+            // })
+            // await owner.save().then(owner => {
+            //     res.json("success")
+            //     console.log(owner);
+            // })
         } catch (error) {
             res.json("fail")
             console.log("error", error);
@@ -47,15 +66,17 @@ module.exports = {
                 if (data) {
                     const id = data.id
                     console.log(id);
-                    const token = jwt.sign({id}, "jwtSecret",{
-                        expiresIn:300
-                    })
+                    // const token = jwt.sign({id}, "jwtSecret",{
+                    //     expiresIn:300
+                    // })
                     console.log("login success");
                     res.json(owner)
                 } else {
+                    res.json("password wrong")
                     console.log("password wrong");
                 }
             } else {
+                res.json("email not get")
                 console.log("email not get");
             }
         } catch (error) {
