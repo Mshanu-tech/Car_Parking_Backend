@@ -1,9 +1,17 @@
 const ownerschema = require("../model/owner/owner")
 const plotSchema = require("../model/owner/plot")
+const nodemailer = require("nodemailer")
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const maxAge = 3 * 24 * 60 * 60;
 
+let mailTransporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+        user: process.env.EMAIL,
+        pass: process.env.PASS
+    }
+})
 // const createToken = (id: string) => {
 //     try {
 //         return jwt.sign({ id }, secret_key, {
@@ -31,13 +39,12 @@ module.exports = {
                 req.body.token = val
                 req.session.signup = req.body
                 // console.log("session",req.session.signup);
-                // mailTransporter.sendMail({
-                //     to: email,
-                //     from: process.env.EMAIL,
-                //     subject: 'Signup Verification',
-                //     html: `<h4>This your token for OTP Verfication </h4>:<h2>${val}</h2>`
-                // })
-                // res.redirect('/otpverification')
+                mailTransporter.sendMail({
+                    to: email,
+                    from: process.env.EMAIL,
+                    subject: 'Signup Verification',
+                    html: `<h4>This your token for OTP Verfication </h4>:<h2>${val}</h2>`
+                })
             }
             // console.log(req.body);
             // const owner = new ownerschema({
