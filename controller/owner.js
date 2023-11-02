@@ -28,7 +28,7 @@ module.exports = {
     signup: async (req, res) => {
         const { email, name, number, password,Image } = req.body;
         if (!name || !email || !password  || !number) {
-            return res.json('plz fill the property' )
+            return res.json('success' )
         }
         try {
             const ownerExist = await ownerschema.findOne({ email: email });
