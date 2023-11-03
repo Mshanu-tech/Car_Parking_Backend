@@ -28,7 +28,7 @@ module.exports = {
     signup: async (req, res) => {
         const { email, name, number, password,Image } = req.body;
         if (!name || !email || !password  || !number) {
-            return res.json('success' )
+            return res.json('plz fill the property' )
         }
         try {
             const ownerExist = await ownerschema.findOne({ email: email });
@@ -38,14 +38,16 @@ module.exports = {
                 var val = Math.floor(1000 + Math.random() * 9000);
                 req.body.token = val
                 req.session.signup = req.body
-                // console.log("session",req.session.signup);
-                mailTransporter.sendMail({
-                    to: email,
-                    from: process.env.EMAIL,
-                    subject: 'Signup Verification',
-                    html: `<h4>This your token for OTP Verfication </h4>:<h2>${val}</h2>`
-                })
+
+                // mailTransporter.sendMail({
+                //     to: email,
+                //     from: process.env.EMAIL,
+                //     subject: 'Signup Verification',
+                //     html: `<h4>This your token for OTP Verfication </h4>:<h2>${val}</h2>`
+                // })
             }
+            res.json("otpverificaton")
+      
             // console.log(req.body);
             // const owner = new ownerschema({
             //     name: name,
@@ -61,6 +63,35 @@ module.exports = {
         } catch (error) {
             res.json("fail")
             console.log("error", error);
+        }
+    },
+    otpverificatons: async (req, res) => {
+        try {
+            const { digit1, digit2, digit3, digit4 } = req.body
+            console.log(req.body);
+            const otp = digit1 + digit2 + digit3 + digit4
+            console.log("signup",req.session );
+            console.log("token", req.session.signup.token);
+            // const { name, email, password, token, number } = req.session.signup;
+
+            if (token == otp) {
+                const user = new ownerschema({ name, email, password, number })
+                console.log(user);
+                // await user.save().then((doc) => {
+                //     req.session.logg = doc
+                //     res.render('user/payments', {
+                //         user_id: user.id,
+                //         username: user.name,
+                //         phone: user.number
+                //     });
+                // })
+            } else {
+                // res.redirect('/otpverification')
+                console.log('invalid otp');
+            }
+        } catch (error) {
+            console.log(error);
+            // res.redirect('/error')
         }
     },
     login: async (req, res) => {

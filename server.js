@@ -19,6 +19,7 @@ app.use(session({
   cookie: { maxAge: 60000 },
   resave: false 
 }));
+// console.log(process.env.session_secret);
 // Connect to MongoDB
 connection()
 
