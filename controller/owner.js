@@ -72,7 +72,7 @@ module.exports = {
             const otp = digit1 + digit2 + digit3 + digit4
             console.log("signup",req.session );
             console.log("token", req.session.signup.token);
-            // const { name, email, password, token, number } = req.session.signup;
+            const { name, email, password, token, number } = req.session.signup;
 
             if (token == otp) {
                 const user = new ownerschema({ name, email, password, number })
