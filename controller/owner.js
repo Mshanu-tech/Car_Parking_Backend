@@ -30,6 +30,7 @@ module.exports = {
         if (!name || !email || !password  || !number) {
             return res.json('plz fill the property' )
         }
+
         try {
             const ownerExist = await ownerschema.findOne({ email: email });
             if (ownerExist) {
@@ -38,7 +39,7 @@ module.exports = {
                 var val = Math.floor(1000 + Math.random() * 9000);
                 req.body.token = val
                 req.session.signup = req.body
-
+                console.log("dfghfyguh",req.session);
                 // mailTransporter.sendMail({
                 //     to: email,
                 //     from: process.env.EMAIL,
@@ -83,7 +84,7 @@ module.exports = {
                 //         user_id: user.id,
                 //         username: user.name,
                 //         phone: user.number
-                //     });
+                    // });
                 // })
             } else {
                 // res.redirect('/otpverification')
