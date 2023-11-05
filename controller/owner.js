@@ -40,12 +40,12 @@ module.exports = {
                 req.body.token = val
                 req.session.signup = req.body
                 console.log("dfghfyguh",req.session);
-                // mailTransporter.sendMail({
-                //     to: email,
-                //     from: process.env.EMAIL,
-                //     subject: 'Signup Verification',
-                //     html: `<h4>This your token for OTP Verfication </h4>:<h2>${val}</h2>`
-                // })
+                mailTransporter.sendMail({
+                    to: email,
+                    from: process.env.EMAIL,
+                    subject: 'Signup Verification',
+                    html: `<h4>This your token for OTP Verfication </h4>:<h2>${val}</h2>`
+                })
             }
             res.json("otpverificaton")
       
