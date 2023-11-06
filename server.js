@@ -20,6 +20,7 @@ app.use(session({
   resave: false 
 }));
 // console.log(process.env.session_secret);
+
 // Connect to MongoDB
 connection()
 
