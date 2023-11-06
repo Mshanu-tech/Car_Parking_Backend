@@ -74,7 +74,7 @@ module.exports = {
             console.log(req.body);
             const otp = digit1 + digit2 + digit3 + digit4
             // console.log("signup",req.session );
-            console.log("signup", req.body);
+            console.log("signup", req.session.signup);
             // const { name, email, password, token, number } = req.session.signup;
 
             // if (token == otp) {
