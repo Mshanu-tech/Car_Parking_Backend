@@ -216,6 +216,7 @@ module.exports = {
     deletePlot: async (req, res) => {
         const { id } = req.params
         console.log(id);
+        
         try {
             await plotSchema.deleteOne({ _id: id })
                 .then(() => {
