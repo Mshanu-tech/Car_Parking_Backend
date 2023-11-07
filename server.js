@@ -9,19 +9,18 @@ const jwt = require('jsonwebtoken')
 const session = require("express-session")
 const crypto = require("crypto")
 
-const sessionSecretKey = crypto.randomBytes(64).toString('hex');
-console.log(sessionSecretKey);
 // Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
+
+// Configure and use Express session
 app.use(session({
-  secret: sessionSecretKey,
+  secret: process.env.SESSION_SECRET,
   saveUninitialized:true,
   cookie: { maxAge: 60000 },
   resave: false 
 }));
-// console.log(process.env.session_secret);
 
 // Connect to MongoDB
 connection()

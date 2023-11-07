@@ -32,21 +32,27 @@ module.exports = {
         }
     
         try {
-            const ownerExist = await ownerschema.findOne({ email: email });
-            if (ownerExist) {
-                return res.json('Email already exists.');
-            } else {
+            // const ownerExist = await ownerschema.findOne({ email: email });
+            // if (ownerExist) {
+                // return res.json('Email already exists.');
+            // } else {
                 var val = Math.floor(1000 + Math.random() * 9000);
-                req.body.token = val;
-                req.session.signup = req.body;
-                console.log("Signup session data:", req.session.signup); // Add this line for debugging
-                mailTransporter.sendMail({
-                    to: email,
-                    from: process.env.EMAIL,
-                    subject: 'Signup Verification',
-                    html: `<h4>This your token for OTP Verification</h4>:<h2>${val}</h2>`
-                });
-            }
+                // mailTransporter.sendMail({
+                //     to: email,
+                //     from: process.env.EMAIL,
+                //     subject: 'Signup Verification',
+                //     html: `<h4>This your token for OTP Verification</h4>:<h2>${val}</h2>`
+                // });
+            // }
+            req.session.user = {
+                name: name,
+                email: email,
+                phone: number,
+                image: Image
+              };
+              console.log(req.session.user,val);
+            
+
             res.json("otpverificaton");
         } catch (error) {
             res.json("fail");
@@ -73,15 +79,11 @@ module.exports = {
             const { digit1, digit2, digit3, digit4 } = req.body
             console.log(req.body);
             const otp = digit1 + digit2 + digit3 + digit4
-            // console.log("signup",req.session );
-            console.log("signup", req.session.signup);
-            // const { name, email, password, token, number } = req.session.signup;
-
+console.log(req.session.user);
             // if (token == otp) {
                 // const user = new ownerschema({ name, email, password, number })
                 // console.log(user);
                 // await user.save().then((doc) => {
-                //     req.session.logg = doc
                 //     res.render('user/payments', {
                 //         user_id: user.id,
                 //         username: user.name,
