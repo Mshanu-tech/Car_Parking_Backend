@@ -1,6 +1,7 @@
 const ownerschema = require("../model/owner/owner")
 const plotSchema = require("../model/owner/plot")
 const nodemailer = require("nodemailer")
+const session = require("express-session")
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const maxAge = 3 * 24 * 60 * 60;
@@ -44,12 +45,7 @@ module.exports = {
                 //     html: `<h4>This your token for OTP Verification</h4>:<h2>${val}</h2>`
                 // });
             // }
-            req.session.user = {
-                name: name,
-                email: email,
-                phone: number,
-                image: Image
-              };
+            req.session.user = req.body
               console.log(req.session.user,val);
             
 
