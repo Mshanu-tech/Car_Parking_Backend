@@ -21,7 +21,7 @@ app.use(
   session({
     key: 'user_sid',
     secret: process.env.SESSION_SECRET,
-    saveUninitialized: false,
+    saveUninitialized: true,
     resave: false,
     cookie:{
       expires:60000 

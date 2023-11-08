@@ -45,9 +45,12 @@ module.exports = {
                 //     html: `<h4>This your token for OTP Verification</h4>:<h2>${val}</h2>`
                 // });
             // }
-            req.session.user = req.body
-              console.log(req.session.user,val);
+            // req.session.user = req.body
+            //   console.log(req.session.user,val);
             
+            req.body.token = val
+            req.session.signup = req.body
+
 
             res.json("otpverificaton");
         } catch (error) {
@@ -75,7 +78,9 @@ module.exports = {
             const { digit1, digit2, digit3, digit4 } = req.body
             console.log(req.body);
             const otp = digit1 + digit2 + digit3 + digit4
-console.log(req.session.user);
+            const { token} = req.session.signup;
+            // console.log();
+console.log(token);
             // if (token == otp) {
                 // const user = new ownerschema({ name, email, password, number })
                 // console.log(user);
