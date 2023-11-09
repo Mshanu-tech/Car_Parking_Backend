@@ -33,7 +33,7 @@ module.exports = {
         }
     
         try {
-            // const ownerExist = await ownerschema.findOne({ email: email });
+            const ownerExist = await ownerschema.findOne({ email: email });
             // if (ownerExist) {
                 // return res.json('Email already exists.');
             // } else {
