@@ -45,7 +45,7 @@ module.exports = {
                     html: `<h4>This your token for OTP Verification</h4>:<h2>${val}</h2>`
                 });
             }
-            // req.session.user = req.body
+            req.session.user = req.body
             //   console.log(req.session.user,val);
             
             req.body.token = val
