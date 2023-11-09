@@ -34,9 +34,9 @@ module.exports = {
     
         try {
             const ownerExist = await ownerschema.findOne({ email: email });
-            // if (ownerExist) {
-                // return res.json('Email already exists.');
-            // } else {
+            if (ownerExist) {
+                return res.json('Email already exists.');
+            } else {
                 var val = Math.floor(1000 + Math.random() * 9000);
                 // mailTransporter.sendMail({
                 //     to: email,
@@ -44,7 +44,7 @@ module.exports = {
                 //     subject: 'Signup Verification',
                 //     html: `<h4>This your token for OTP Verification</h4>:<h2>${val}</h2>`
                 // });
-            // }
+            }
             // req.session.user = req.body
             //   console.log(req.session.user,val);
             
