@@ -48,8 +48,8 @@ module.exports = {
             req.session.user = req.body
             //   console.log(req.session.user,val);
             
-            // req.body.token = val
-            // req.session.signup = req.body
+            req.body.token = val
+            req.session.signup = req.body
 
 
             res.json("otpverificaton");
