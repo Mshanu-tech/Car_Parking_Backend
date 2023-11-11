@@ -3,10 +3,10 @@ require("dotenv").config();
 const cors = require('cors');
 const app = express();
 const bodyParser = require('body-parser');
-const connection = require("./db")
+// const connection = require("./db")
 const cookieParser = require('cookie-parser')
 const session = require("express-session")
-const morgan = require('morgan')
+// const morgan = require('morgan')
 const crypto = require("crypto")
 
 // Middleware
@@ -29,7 +29,8 @@ app.use(
   }));
 
 // Connect to MongoDB
-connection()
+
+// connection()
 
 // Use the owner router
 
