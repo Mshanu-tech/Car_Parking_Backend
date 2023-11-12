@@ -29,7 +29,7 @@ module.exports = {
     signup: async (req, res) => {
         const { email, name, number, password, Image } = req.body;
         if (!name || !email || !password || !number) {
-            return res.json('Please fill in all the required fields.');
+            // return res.json('Please fill in all the required fields.');
         }
     
         try {
