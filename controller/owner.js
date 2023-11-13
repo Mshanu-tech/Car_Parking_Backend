@@ -33,7 +33,7 @@ module.exports = {
         }
     
         try {
-            const ownerExist = await ownerschema.findOne({ email: email });
+            // const ownerExist = await ownerschema.findOne({ email: email });
             // if (ownerExist) {
             //     return res.json('Email already exists.');
             // } else {
@@ -46,10 +46,10 @@ module.exports = {
             //     });
             // }
             
-            req.session.user = req.body
-              console.log(req.session.user,val);
+            req.session.user = {name}
+            //   console.log(req.session.user);
             
-            req.body.token = val
+            // req.body.token = val
             req.session.signup = req.body
 
 
@@ -76,10 +76,13 @@ module.exports = {
 
     otpverificatons: async (req, res) => {
         try {
-            const { digit1, digit2, digit3, digit4 } = req.body
             console.log(req.body);
+            const { digit1, digit2, digit3, digit4 } = req.body
+            console.log(req.session.signup);
+            // const value = req.session.user
+            // console.log(value);
             const otp = digit1 + digit2 + digit3 + digit4
-            const { token} = req.session.signup;
+            // const { token} = req.session.signup;
             // console.log();
             // if (token == otp) {
                 // const user = new ownerschema({ name, email, password, number })

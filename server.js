@@ -17,15 +17,13 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
 // Configure and use Express session
+
 app.use(
   session({
-    key: 'user_sid',
     secret: process.env.SESSION_SECRET,
-    saveUninitialized: true,
+    saveUninitialized: false,
     resave: false,
-    cookie:{
-      expires:60000 
-    }
+    cookie: { secure: false },
   }));
 
 // Connect to MongoDB
