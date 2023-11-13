@@ -25,7 +25,7 @@ module.exports = {
         try {
             const user = await userschema.find()
             res.json({ status: "success", message: "success fully fetched", data: { user } })
-            // console.log(user);
+            console.log(user);
         } catch (error) {
             res.json("fail")
             console.log("Error", error);
