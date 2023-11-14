@@ -4,27 +4,17 @@ const cors = require('cors');
 const app = express();
 const bodyParser = require('body-parser');
 // const connection = require("./db")
-const cookieParser = require('cookie-parser')
+// const cookieParser = require('cookie-parser')
 const session = require("express-session")
 // const morgan = require('morgan')
-const crypto = require("crypto")
+// const crypto = require("crypto")
 
 // Middleware
 app.use(express.json());
-app.use(bodyParser.urlencoded({ extended: true }))
-app.use(cookieParser())
+app.use(bodyParser.json());
+// app.use(cookieParser())
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
-
-// Configure and use Express session
-
-app.use(
-  session({
-    secret: process.env.SESSION_SECRET,
-    saveUninitialized: false,
-    resave: false,
-    cookie: { secure: false },
-  }));
 
 // Connect to MongoDB
 
