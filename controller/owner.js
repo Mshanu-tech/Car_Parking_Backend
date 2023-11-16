@@ -34,8 +34,8 @@ module.exports = {
       const { digit1, digit2, digit3, digit4 } = req.body;
 
       // Assuming you have the name in the JWT payload
-      const decodedToken = jwt.verify(req.token, process.env.secretKey);
-      const name = decodedToken.name;
+    //   const decodedToken = jwt.verify(req.token, process.env.secretKey);
+    //   const name = decodedToken.name;
 
       const otp = digit1 + digit2 + digit3 + digit4;
 // console.log(decodedToken)
