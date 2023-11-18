@@ -6,23 +6,24 @@ const {
     otpverificatons,
     editowner,
     login,
-    users,
     postplots,
     getplots,
     getplot,
     editPlot,
-    deletePlot
+    deletePlot,
+    getUsers
 } = require('../controller/owner')
 
 router.post('/signup',signup)
 router.post('/otpverificaton',otpverificatons)
 router.put('/profile', editowner)
 router.post('/login',login)
-router.get('/users',users)
+router.get('/users',getUsers)
 router.post('/plots',postplots)
 router.get('/plots',getplots)
 router.get('/plot/:id', getplot);
 router.put('/plot', editPlot);
 router.delete('/plot/:id',deletePlot)
+// router.get('/users', getUsers)
 
 module.exports=router

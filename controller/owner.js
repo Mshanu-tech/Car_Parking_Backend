@@ -1,5 +1,6 @@
 const ownerschema = require("../model/owner/owner");
 const plotSchema = require("../model/owner/plot");
+const userschema = require("../model/user/user")
 const nodemailer = require("nodemailer");
 const session = require("express-session");
 const bcrypt = require("bcrypt");
@@ -17,11 +18,11 @@ let mailTransporter = nodemailer.createTransport({
 module.exports = {
   signup: async (req, res) => {
     const { email, name, number, password, Image } = req.body;
-
+console.log("signup");
     try {
       const token = jwt.sign({ name, email, number }, process.env.secretKey, { expiresIn: '1h' });
       console.log(token);
-
+      
       res.json({ success: true, message: "otpverificaton", token });
     } catch (error) {
       res.json({ success: false, message: "fail" });
@@ -33,15 +34,7 @@ module.exports = {
     try {
       const { digit1, digit2, digit3, digit4 } = req.body;
 
-      // Assuming you have the name in the JWT payload
-    //   const decodedToken = jwt.verify(req.token, process.env.secretKey);
-    //   const name = decodedToken.name;
-
       const otp = digit1 + digit2 + digit3 + digit4;
-// console.log(decodedToken)
-console.log("sdfygtkahwsfetawgefhlu",req.token);
-      // Now you can use the `name` variable
-    //   console.log(name);
 
     } catch (error) {
       console.log(error);
@@ -94,8 +87,14 @@ console.log("sdfygtkahwsfetawgefhlu",req.token);
         }
     },
     users: async (req, res) => {
-        const owner = await ownerschema.find()
-        console.log(owner);
+        try {
+            const users = await userschema.find()
+            res.json({ success: true, message: "success", users });
+        } catch (error) {
+            console.log(error);
+            res.json({message: "fail"})
+        }
+
     },
     postplots: async (req, res) => {
         const { center, placename, hour, day, month, notworking, location, selectedFeatures, carspot, Image, plotdetails } = req.body

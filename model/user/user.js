@@ -13,6 +13,9 @@ const userschema = new mongoose.Schema({
     },
     password:{
         type:String
+    },
+    block: {
+        type:Boolean
     }
 });
 
