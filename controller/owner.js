@@ -86,7 +86,7 @@ console.log("signup");
             console.log(error);
         }
     },
-    users: async (req, res) => {
+    getUsers: async (req, res) => {
         try {
             const users = await userschema.find()
             res.json({ success: true, message: "success", users });
