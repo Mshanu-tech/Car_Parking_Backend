@@ -22,7 +22,7 @@ console.log("signup");
     try {
       const token = jwt.sign({ name, email, number }, process.env.secretKey, { expiresIn: '1h' });
       console.log(token);
-      
+    
       res.json({ success: true, message: "otpverificaton", token });
     } catch (error) {
       res.json({ success: false, message: "fail" });
