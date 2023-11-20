@@ -49,5 +49,15 @@ module.exports = {
             res.json("fail")
             console.log("Error", error);
         }
+    },
+    getowner:async (req,res) => {
+        const {id} =req.params
+        console.log(id);
+        try {
+            const owner = await ownershema.findById(id)
+            res.json(owner)
+        } catch (error) {
+            res.json("not get owner")
+        }
     }
 }

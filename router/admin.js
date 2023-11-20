@@ -5,11 +5,13 @@ const {
     signup,
     users,
     plots,
-    owners
+    owners,
+    getowner
 } = require("../controller/admin")
 
 router.post('/signup', signup)
-router.get('/user', users)
-router.get('/plot', plots)
-router.get('/owner', owners)
+router.get('/users', users)
+router.get('/plots', plots)
+router.get('/owners', owners)
+router.get('/owner/:id', getowner)
 module.exports=router
