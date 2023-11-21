@@ -1,6 +1,6 @@
 const adminschema = require("../model/admin/admin")
 const userschema = require("../model/user/user")
-const plotschema = require("../model/owner/plot")
+const plotSchema = require("../model/owner/plot")
 const ownershema = require("../model/owner/owner")
 
 module.exports = {
@@ -33,7 +33,7 @@ module.exports = {
     },
     plots: async (req,res) =>{
         try {
-            const plot = await plotschema.find()
+            const plot = await plotSchema.find()
             res.json({ status: "success", message: "success fully fetched", data: { plot } })
             // console.log(plot);
         } catch (error) {
@@ -59,5 +59,54 @@ module.exports = {
         } catch (error) {
             res.json("not get owner")
         }
+    },
+    getplot: async (req, res) => {
+        const { id } = req.params
+        // console.log(id);
+        try {
+            const plot = await plotSchema.findById(id);
+            res.json(plot)
+        } catch (error) {
+            res.json("fail")
+            console.log(error);
+        }
+    },
+    editPlot: (req, res) => {
+        const { _id, center, placename, hour, day, month, location, images, notworking, carspot, plotdetails, } = req.body
+        console.log(_id, center, placename, hour, day, month, location, images, plotdetails);
+        try {
+            plotSchema.findByIdAndUpdate(_id, {
+                center: center,
+                placename: placename,
+                hour: hour,
+                day: day,
+                month: month,
+                location: location,
+                carspot:carspot,
+                plotdetails: plotdetails,
+                images: images,
+                notWorkingspot:notworking
+            }).then((plot) => {
+                console.log(plot);
+            })
+
+        } catch (error) {
+            console.log(error);
+        }
+    },
+    deletePlot: async (req, res) => {
+        const { id } = req.params
+        console.log(id);
+        
+        try {
+            await plotSchema.deleteOne({ _id: id })
+                .then(() => {
+                    console.log("deleted");
+                })
+            res.json("deleted")
+        } catch (error) {
+            console.log(error);
+        }
+
     }
 }
