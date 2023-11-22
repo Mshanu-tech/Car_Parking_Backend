@@ -71,6 +71,17 @@ module.exports = {
             console.log(error);
         }
     },
+    getuser: async (req, res) => {
+        const { id } = req.params
+        // console.log(id);
+        try {
+            const user = await userschema.findById(id);
+            res.json(user)
+        } catch (error) {
+            res.json("fail")
+            console.log(error);
+        }
+    },
     editPlot: (req, res) => {
         const { _id, center, placename, hour, day, month, location, images, notworking, carspot, plotdetails, } = req.body
         console.log(_id, center, placename, hour, day, month, location, images, plotdetails);

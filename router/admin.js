@@ -4,6 +4,7 @@ const router = express.Router()
 const {
     signup,
     users,
+    getuser,
     plots,
     owners,
     getowner,
@@ -14,6 +15,7 @@ const {
 
 router.post('/signup', signup)
 router.get('/users', users)
+router.get('/user', getuser)
 router.get('/plots', plots)
 router.get('/owners', owners)
 router.get('/owner/:id', getowner)
