@@ -15,7 +15,7 @@ const {
 
 router.post('/signup', signup)
 router.get('/users', users)
-router.get('/user', getuser)
+router.get('/user/:id', getuser)
 router.get('/plots', plots)
 router.get('/owners', owners)
 router.get('/owner/:id', getowner)
