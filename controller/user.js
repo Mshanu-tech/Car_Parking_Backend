@@ -4,14 +4,15 @@ const userschema = require("../model/user/user")
 
 module.exports = {
     
-    getuser: async (req,res) => {
+    postuser: async (req,res) => {
         try {
-            const { name, email, phone, password } = req.body
+            const { name, email, phone, password,Image } = req.body
             const user = new userschema({
                 name:name,
                 email:email,
                 phone:phone,
-                password:password
+                password:password,
+                image:Image
             })
             await user.save().then( e =>{
                 console.log(e);

@@ -11,7 +11,8 @@ const {
     getplot,
     editPlot,
     deletePlot,
-    getUsers
+    getUsers,
+    getUser
 } = require('../controller/owner')
 
 router.post('/signup',signup)
@@ -24,6 +25,6 @@ router.get('/plots',getplots)
 router.get('/plot/:id', getplot);
 router.put('/plot', editPlot);
 router.delete('/plot/:id',deletePlot)
-// router.get('/users', getUsers)
+router.get('/user/:id', getUser)
 
 module.exports=router

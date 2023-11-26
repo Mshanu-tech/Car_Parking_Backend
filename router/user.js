@@ -4,10 +4,10 @@ const router = express.Router()
 const {
     plots,
     carDetails,
-    getuser
+    postuser
 } = require('../controller/user')
 
-router.post('/',getuser)
+router.post('/',postuser)
 router.get('/place',plots)
 router.post('/carDetails',carDetails)
 

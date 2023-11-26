@@ -14,6 +14,9 @@ const userschema = new mongoose.Schema({
     password:{
         type:String
     },
+    image: {
+        type: String
+    },
     block: {
         type:Boolean
     }

@@ -96,6 +96,19 @@ console.log("signup");
         }
 
     },
+    getUser: async (req, res) => {
+        const { id } = req.params
+        console.log(id);
+        try {
+            const user = await userschema.findById(id)
+            console.log(user);
+            res.json({ success: true, message: "success", user });
+        } catch (error) {
+            console.log(error);
+            res.json({message: "fail"})
+        }
+
+    },
     postplots: async (req, res) => {
         const { center, placename, hour, day, month, notworking, location, selectedFeatures, carspot, Image, plotdetails } = req.body
         console.log(plotdetails, Image)
