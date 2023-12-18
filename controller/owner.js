@@ -7,6 +7,8 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const maxAge = 3 * 24 * 60 * 60;
 
+//owner model
+
 let mailTransporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
